@@ -5,18 +5,21 @@
 #   ansible.builtin.debug:
 #     msg: From the updated Fedora role.
 
+- name: Load variables
+  ansible.builtin.include_vars:
+    dir: vars
+
 - name: Install RPM Fusion keys
   loop: "{{ rpm_fusion_keys }}"
   ansible.builtin.rpm_key:
     key: "{{ item.key }}"
     state: present
 
-- name: Configure RPM fusion repositories
+- name: Install RPM Fusion repositories
+  loop: "{{ rpm_fusion_repos }}"
   ansible.builtin.dnf:
-    name:
-      - "{{ rpmfusion_free_repo }}"
-      - "{{ rpmfusion_nonfree_repo }}"
-    state: latest
+    name: "{{ item.repo }}"
+    state: present
 
 - name: Configure additional repositories
   loop: "{{ repositories }}"
@@ -27,3 +30,15 @@
     gpgcheck: "{{ item.gpgcheck }}"
     gpgkey: "{{ item.gpgkey }}"
     enabled: "{{ item.enabled }}"
+
+- name: Remove unwanted default applications
+  loop: "{{ applications_remove }}"
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: absent
+
+- name: Install applications
+  loop: "{{ applications_install }}"
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: latest

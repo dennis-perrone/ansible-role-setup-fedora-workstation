@@ -1,0 +1,12 @@
+---
+
+applications_remove:
+  - cheese
+  - gnome-tour
+  - libreoffice
+
+applications_install:
+  - code
+  - '@Virtualization'
+  - podman-compose
+  - podman

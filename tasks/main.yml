@@ -1,0 +1,21 @@
+---
+# tasks file for ansible-role-fedora-workstation
+
+- name: From fedora box
+  ansible.builtin.debug:
+    msg: From the Fedora role.
+
+# - name: Install RPM Fusion keys
+#   when: ansible_distribution == 'Fedora'
+#   loop: "{{ rpm_fusion_keys }}"
+#   ansible.builtin.rpm_key:
+#     key: "{{ item.key }}"
+#     state: present
+
+# - name: Configure RPM fusion repositories
+#   when: ansible_distribution == 'Fedora'
+#   ansible.builtin.dnf:
+#     name:
+#       - "{{ rpmfusion_free_repo }}"
+#       - "{{ rpmfusion_nonfree_repo }}"
+#     state: latest

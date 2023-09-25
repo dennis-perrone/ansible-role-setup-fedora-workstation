@@ -1,0 +1,36 @@
+---
+# application task file for ansible-role-fedora-workstation
+
+- name: Update all packages
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+
+- name: Check if a reboot is required
+  notify: reboot_required
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+  register: reboot_required
+
+- name: Reboot if required
+  when: reboot_required.stat.exists == true
+  ansible.builtin.reboot:
+
+- name: Install default applications
+  loop: "{{ dnf_applications_install }}"
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: latest
+
+- name: Remove unwanted default applications
+  loop: "{{ dnf_applications_remove }}"
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: absent
+
+- name: Install flatpak applications
+  loop: "{{ flatpak_applications_install }}"
+  community.general.flatpak:
+    name: "{{ item }}"
+    state: "present"
+    remote: "flathub"

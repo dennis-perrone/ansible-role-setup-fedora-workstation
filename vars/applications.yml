@@ -1,12 +1,27 @@
 ---
 
-applications_remove:
+dnf_applications_remove:
   - cheese
   - gnome-tour
   - libreoffice
+  - gnome-boxes
 
-applications_install:
+dnf_applications_install:
   - code
   - '@Virtualization'
   - podman-compose
   - podman
+  - dnf-plugin-tracer
+  - python3-virtualenvwrapper
+  - cronie
+  - tlp
+  - neovim
+  - ripgrep
+  - qpdf
+  - chromium
+  - keepassxc
+
+flatpak_applications_install:
+  - io.podman_desktop.PodmanDesktop
+  - org.signal.Signal
+  - com.mattjakeman.ExtensionManager

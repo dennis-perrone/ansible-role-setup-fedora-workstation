@@ -1,0 +1,34 @@
+---
+# repository task file for ansible-role-fedora-workstation
+
+- name: Install RPM Fusion keys
+  loop: "{{ rpm_fusion_keys }}"
+  ansible.builtin.rpm_key:
+    key: "{{ item }}"
+    state: present
+
+- name: Install RPM Fusion repositories
+  loop: "{{ rpm_fusion_repos }}"
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+
+- name: Configure additional repositories
+  loop: "{{ repositories }}"
+  ansible.builtin.yum_repository:
+    name: "{{ item.repo_name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.baseurl }}"
+    gpgcheck: "{{ item.gpgcheck }}"
+    gpgkey: "{{ item.gpgkey }}"
+    enabled: "{{ item.enabled }}"
+    exclude: "{{ item.exclude }}"
+
+- name: Add Flathub repository
+  loop: "{{ flatpak_remotes }}"
+  community.general.flatpak_remote:
+    name: "{{ item.repo_name }}"
+    state: "{{ item.state }}"
+    flatpakrepo_url: "{{ item.flatpak_url }}"
+    method: "{{ item.method }}"
+    enabled: "{{ item.enabled }}"

@@ -9,36 +9,10 @@
   ansible.builtin.include_vars:
     dir: vars
 
-- name: Install RPM Fusion keys
-  loop: "{{ rpm_fusion_keys }}"
-  ansible.builtin.rpm_key:
-    key: "{{ item.key }}"
-    state: present
+- name: Execute tasks to add repositories
+  ansible.builtin.import_tasks:
+    file: repositories.yml
 
-- name: Install RPM Fusion repositories
-  loop: "{{ rpm_fusion_repos }}"
-  ansible.builtin.dnf:
-    name: "{{ item.repo }}"
-    state: present
-
-- name: Configure additional repositories
-  loop: "{{ repositories }}"
-  ansible.builtin.yum_repository:
-    name: "{{ item.repo_name }}"
-    description: "{{ item.description }}"
-    baseurl: "{{ item.baseurl }}"
-    gpgcheck: "{{ item.gpgcheck }}"
-    gpgkey: "{{ item.gpgkey }}"
-    enabled: "{{ item.enabled }}"
-
-- name: Remove unwanted default applications
-  loop: "{{ applications_remove }}"
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-    state: absent
-
-- name: Install applications
-  loop: "{{ applications_install }}"
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-    state: latest
+- name: Execute tasks for default applications
+  ansible.builtin.import_tasks:
+    file: applications.yml

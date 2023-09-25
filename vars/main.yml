@@ -30,8 +30,8 @@ rpm_fusion_keys:
   - key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
 
 # rpmfusion_free_key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
-rpmfusion_free_repo: https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-37.noarch.rpm
+rpmfusion_free_repo: https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-38.noarch.rpm
 
 # rpmfusion_nonfree_key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
-rpmfusion_nonfree_repo: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-37.noarch.rpm
+rpmfusion_nonfree_repo: https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-38.noarch.rpm
 

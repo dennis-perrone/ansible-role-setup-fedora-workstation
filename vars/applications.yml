@@ -7,7 +7,8 @@ dnf_applications_remove:
   - gnome-boxes
 
 dnf_applications_install:
-  - code
+  # - code
+  - codium
   - '@Virtualization'
   - podman-compose
   - podman

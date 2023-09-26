@@ -16,3 +16,7 @@
 - name: Execute tasks for default applications
   ansible.builtin.import_tasks:
     file: applications.yml
+
+# - name: Configure Gnome desktop environment
+#   ansible.builtin.import_tasks:
+#     file: desktop_environment.yml

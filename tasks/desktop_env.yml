@@ -1,0 +1,17 @@
+---
+# desktop environment task file for ansible-role-fedora-workstation
+
+- name: Configure terminal shortcut name
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name"
+    value: 'Launch Terminal'
+
+- name: Configure terminal shortcut
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command"
+    value: "'gnome-terminal'"
+
+- name: Enable custom keybindings
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/]"

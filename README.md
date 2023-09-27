@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+The purpose of this role is to set up Fedora Workstation.
 
 Requirements
 ------------

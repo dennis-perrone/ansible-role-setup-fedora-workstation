@@ -1,6 +1,8 @@
 ---
 # desktop environment task file for ansible-role-fedora-workstation
 
+# Configure shortcuts and keybindings
+
 - name: Configure terminal shortcut name
   community.general.dconf:
     key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name"
@@ -11,7 +13,61 @@
     key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command"
     value: "'gnome-terminal'"
 
+- name: terminal shortcut binding
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding"
+    value: "'<Control>Return'"
+
 - name: Enable custom keybindings
   dconf:
     key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
-    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/]"
+    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+
+# Configure terminal settings
+
+- name: Set terminal transparency
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-transparent-background"
+    value: "true"
+
+- name: Set terminal transparency percentage
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-transparency-percent"
+    value: "50"
+
+- name: Set terminal bolding
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/bold-is-bright"
+    value: "true"
+
+# Configure power settings
+
+- name: Show  the battery percentage
+  dconf:
+    key: "/org/gnome/desktop/interface/show-battery-percentage"
+    value: "true"
+
+- name: Ignore lid closing
+  become: true
+  lineinfile:
+    path: /etc/systemd/logind.conf
+    regexp: '^HandleLidSwitch='
+    insertafter: '^#HandleLidSwitch='
+    line: 'HandleLidSwitch=ignore'
+
+# Multitasking settings
+
+- name: Workspaces span multiple displays
+  dconf:
+    key: "/org/gnome/mutter/workspaces-only-on-primary"
+    value: "true"
+
+- name: Ensure that app-switcher is only on the current workspace
+  dconf:
+    key: "/org/gnome/shell/app-switcher/current-workspace-only"
+    value: "false"
+
+- name: disable hot corner
+  dconf:
+    key: "/org/gnome/desktop/interface/enable-hot-corners"
+    value: "false"

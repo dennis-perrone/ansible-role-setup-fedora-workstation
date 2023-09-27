@@ -1,10 +1,6 @@
 ---
 # tasks file for ansible-role-fedora-workstation
 
-# - name: From fedora box
-#   ansible.builtin.debug:
-#     msg: From the updated Fedora role.
-
 - name: Load variables
   ansible.builtin.include_vars:
     dir: vars
@@ -19,4 +15,4 @@
 
 # - name: Configure Gnome desktop environment
 #   ansible.builtin.import_tasks:
-#     file: desktop_environment.yml
+#     file: desktop_env.yml

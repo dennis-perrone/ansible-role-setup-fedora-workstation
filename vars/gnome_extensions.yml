@@ -1,0 +1,25 @@
+---
+
+gnome_extension_list:
+  - dash-to-panel@jderose9.github.com
+  - date-menu-formatter@marcinjakubowski.github.com
+  - no-overview@fthx
+  - openweather-extension@jenslody.de
+  - tactile@lundal.io
+  - apps-menu@gnome-shell-extensions.gcampax.github.com
+  - background-logo@fedorahosted.org
+  - launch-new-instance@gnome-shell-extensions.gcampax.github.com
+  - places-menu@gnome-shell-extensions.gcampax.github.com
+  - window-list@gnome-shell-extensions.gcampax.github.com
+
+gnome_extensions:
+  - id: 1160
+    enable: true
+  - id: 4655
+    enable: true
+  - id: 4099
+    enable: true
+  - id: 750
+    enable: true
+  - id: 4548
+    enable: true
